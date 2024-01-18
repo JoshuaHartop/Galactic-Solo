@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Player : MonoBehaviour
 { 
@@ -12,15 +9,16 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb; 
     private Vector2 playerDirection;
     public GameObject bullet;
-    private int bulletUpgrade;
+
+    private int bulletUpgrade = 1;
     private float attackCD = 1f; // float to describe attack cooldown
-    private int bulletUpDown;
+
+    private int bulletUpDown = 1;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        bulletUpgrade = 3;
-        bulletUpDown = 1;
     }
 
     // Update is called once per frame
@@ -53,10 +51,8 @@ public class Player : MonoBehaviour
          
         for (int i = 0; i < bulletUpgrade; i++)
         {
-            bulletUpDown = -1 * bulletUpDown;
-            Vector2 pos = new Vector2(transform.position.x + 1, bulletUpDown * (transform.position.y + i)/2); // setting pos to be slightly ahead of the player
+            Vector2 pos = new Vector2(transform.position.x, transform.position.y - (bulletUpgrade / 2f) + i * 1f + .5f);
             Instantiate(bullet, pos, transform.rotation); // spawning the bullet prefab infront of the player with the same rotation
-            
         }
 
     }

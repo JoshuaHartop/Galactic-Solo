@@ -326,6 +326,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 4
   bullet: {fileID: 8403456911605437342, guid: a231b69c579ba634c97b2ade5dd87c63, type: 3}
+  bulletUpgrade: 10
+  bulletUpDown: 1
 --- !u!50 &460547606
 Rigidbody2D:
   serializedVersion: 4
