@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         float directionX = Input.GetAxisRaw("Horizontal"); // gets the value if the player is pressing A or D
         playerDirection = new Vector2(directionX, directionY).normalized; // sets the player to "look" and the direction of the button(s) being pressed
 
-        if (Input.GetKeyDown("space") && Time.time > lastAttackTime + attackCD)
+        if (Input.GetKey("space") && Time.time > lastAttackTime + attackCD)
         {
             spawnBullet();
             lastAttackTime = Time.time;

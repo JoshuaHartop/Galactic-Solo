@@ -4,18 +4,52 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private int _BulletPierce;
     private Enemy enemy;
-    private float moveSpeed = 0.05f;
+    private float _BulletVelocity;
     private Rigidbody2D rb;
-    // Start is called before the first frame update
-    void Start()
+
+    public int BulletPierce
     {
-        
+        get 
+        { 
+            return _BulletPierce;
+        } 
+        set 
+        {
+            _BulletPierce = value;
+        }
     }
 
-    private void Update()
+    public float BulletVelocity
     {
-        transform.Translate(Vector2.right * moveSpeed);
+        get
+        {
+            return _BulletVelocity; 
+        }
+        set
+        {
+            _BulletVelocity = value;
+        }
+    }
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (_BulletPierce == 0)
+        {
+            _BulletPierce = 1;
+        }
+
+        if (_BulletVelocity == 0)
+        {
+            _BulletVelocity = 5.00f;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = (Vector2.right * _BulletVelocity);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,6 +62,13 @@ public class Bullet : MonoBehaviour
         {
             enemy = collision.GetComponent<Enemy>();
             enemy.takeDamage(1);
+            _BulletPierce --;
+            if (_BulletPierce <= 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
+
+
 }
