@@ -8,6 +8,8 @@ TagManager:
   - Border
   - PreloadInstance
   - Enemy
+  - EnemyBorder
+  - BulletBorder
   layers:
   - Default
   - TransparentFX
