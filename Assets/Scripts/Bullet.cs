@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private GameObject player;
-    public float moveSpeed = 0.05f;
+    private Enemy enemy;
+    private float moveSpeed = 0.05f;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     private void Update()
@@ -22,6 +22,12 @@ public class Bullet : MonoBehaviour
         if (collision.tag == "Border")
         {
             Destroy(this.gameObject);
+        }
+
+        else if (collision.tag == "Enemy")
+        {
+            enemy = collision.GetComponent<Enemy>();
+            enemy.takeDamage(1);
         }
     }
 }

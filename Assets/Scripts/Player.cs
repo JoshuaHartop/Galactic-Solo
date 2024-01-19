@@ -13,8 +13,6 @@ public class Player : MonoBehaviour
     private int bulletUpgrade = 1;
     private float attackCD = 1f; // float to describe attack cooldown
 
-    private int bulletUpDown = 1;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +28,11 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-
-            spawnBullet();
+            if (attackCD == 0)
+            {
+                spawnBullet();
+                resetAttack();
+            }
             
         }
     }
@@ -55,6 +56,11 @@ public class Player : MonoBehaviour
             Instantiate(bullet, pos, transform.rotation); // spawning the bullet prefab infront of the player with the same rotation
         }
 
+    }
+
+    void resetAttack()
+    {
+        
     }
 
 }
