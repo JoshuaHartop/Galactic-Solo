@@ -5,10 +5,25 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private int _HP;
+    private Rigidbody2D _rb;
+    private float _EnemyVelocity;
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public Rigidbody2D RB
+    {
+        get
+        {
+            return _rb;
+        }
+
+        set
+        {
+            _rb = value;
+        }
     }
     public int HP
     {
@@ -22,6 +37,18 @@ public class Enemy : MonoBehaviour
              _HP = value;
         }
     }
+    public float EnemyVelocity
+    {
+        get
+        {
+            return _EnemyVelocity;
+        }
+
+        set
+        {
+            _EnemyVelocity = value;
+        }
+    }
 
     // Update is called once per frame
     protected virtual void Update()
@@ -30,6 +57,11 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        _rb.velocity = (Vector2.left * _EnemyVelocity);
     }
 
     protected void Die()
