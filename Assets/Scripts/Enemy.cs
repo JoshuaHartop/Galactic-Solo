@@ -5,12 +5,38 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private int _HP;
+    private bool _inv = false;
     private Rigidbody2D _rb;
-    private float _EnemyVelocity;
-    // Start is called before the first frame update
-    void Start()
+    private float _EnemyVelocity = 0f;
+    private float _EnemyUpVelocity = 0f;
+    private EnemySpawn spawner;
+   protected virtual void Start()
     {
-        
+        spawner = EnemySpawn.Instance;
+    }
+
+    public float EnemyUpVelocity
+    {
+        get 
+        { 
+            return _EnemyUpVelocity; 
+        }
+        set 
+        { 
+            _EnemyUpVelocity = value; 
+        }
+    }
+    public bool INV
+    {
+        get 
+        { 
+            return _inv; 
+        }
+
+        set 
+        { 
+            _inv = value; 
+        }
     }
 
     public Rigidbody2D RB
@@ -53,7 +79,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (_HP <= 0)
+        if (_HP <= 0 && _inv == false)
         {
             Die();
         }
@@ -63,14 +89,16 @@ public class Enemy : MonoBehaviour
     {
         if (_rb)
         {
-            _rb.velocity = (Vector2.left * _EnemyVelocity);
+            _rb.velocity = new Vector2(EnemyVelocity, EnemyUpVelocity);
         }
         
     }
 
     protected void Die()
     {
+        spawner.enemyDeath();
         Destroy(this.gameObject);
+        
     }
 
     public void takeDamage(int damage)

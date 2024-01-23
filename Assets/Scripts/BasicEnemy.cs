@@ -5,10 +5,11 @@ using UnityEngine;
 public class BasicEnemy : Enemy
 {
     private Player player;
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         HP = 1;
-        EnemyVelocity = 2.5f;
+        EnemyVelocity = -2.5f;
         RB = GetComponent<Rigidbody2D>();
 
     }

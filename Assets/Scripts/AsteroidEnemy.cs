@@ -8,10 +8,12 @@ public class AsteroidEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        HP = 2;
-        EnemyVelocity = 5f;
+        base.Start();
+        HP = -1;
+        EnemyVelocity = -5f;
         player = GameObject.Find("Player");
         RB = GetComponent<Rigidbody2D>();
+        INV = true;
 
     }
 
