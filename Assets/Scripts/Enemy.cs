@@ -61,7 +61,11 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.velocity = (Vector2.left * _EnemyVelocity);
+        if (_rb)
+        {
+            _rb.velocity = (Vector2.left * _EnemyVelocity);
+        }
+        
     }
 
     protected void Die()

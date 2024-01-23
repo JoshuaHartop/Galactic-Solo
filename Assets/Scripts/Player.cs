@@ -10,14 +10,30 @@ public class Player : MonoBehaviour
     private Vector2 playerDirection;
     public GameObject bullet;
     private float lastAttackTime; // number to get last time the space was pressed
-
-    private int bulletUpgrade = 1; // number for how many bullets to shoot
+    private int _HP;
+    public int _BulletUpgrade = 1; // number for how many bullets to shoot
     private float attackCD = 1f; // float to describe attack cooldown (smaller = attack more often)
 
+    public int HP
+    {
+        get
+        {
+            return _HP;
+        }
+
+        set
+        {
+            _HP = value;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (_HP == 0)
+        {
+            _HP = 1;
+        }
     }
 
     // Update is called once per frame
@@ -32,6 +48,12 @@ public class Player : MonoBehaviour
             spawnBullet();
             lastAttackTime = Time.time;
         }
+
+        if (_HP <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+        // do gameover here
     }
 
     void FixedUpdate()
@@ -42,12 +64,17 @@ public class Player : MonoBehaviour
     void spawnBullet()
     {
 
-        for (int i = 0; i < bulletUpgrade; i++)
+        for (int i = 0; i < _BulletUpgrade; i++)
         {
-            Vector2 pos = new Vector2(transform.position.x, transform.position.y - (bulletUpgrade / 2f) + i * 1f + .5f);
+            Vector2 pos = new Vector2(transform.position.x, transform.position.y - (_BulletUpgrade / 2f) + i * 1f + .5f);
             Instantiate(bullet, pos, transform.rotation); // spawning the bullet prefab infront of the player with the same rotation
         }
 
+    }
+
+    public void takeDamage(int damage)
+    {
+        _HP = -_HP - damage;
     }
 
 }

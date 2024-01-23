@@ -93,12 +93,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5150022488543076726}
   - component: {fileID: 6552002400595971160}
-  - component: {fileID: 2597837343895528234}
   - component: {fileID: -4967074297874699106}
-  - component: {fileID: 8605658220066071644}
+  - component: {fileID: 6712826253049968980}
   m_Layer: 0
-  m_Name: Bullet
-  m_TagString: PlayerBullet
+  m_Name: EnemyBullet
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,18 +163,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2597837343895528234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8403456911605437342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64140c0d188d4ff4596b5a2388b98796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &-4967074297874699106
 Rigidbody2D:
   serializedVersion: 4
@@ -191,7 +178,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -203,7 +190,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8605658220066071644
+--- !u!114 &6712826253049968980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,7 +199,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8403456911605437342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abe8c017d1ee8e44fa69153baaf529f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f9fc682662247d49afaba7972058694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyFlags: -1
