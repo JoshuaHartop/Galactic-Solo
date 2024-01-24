@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AsteroidEnemy : Enemy
 {
+    [SerializeField]
+    private float _rotationSpeedMin;
+
+    [SerializeField]
+    private float _rotationSpeedMax;
+
     private GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +25,13 @@ public class AsteroidEnemy : Enemy
     }
 
     // Update is called once per frame
+    override protected void Update()
+    {
+        base.Update();
+
+        float rotationSpeed = Random.Range(_rotationSpeedMin, _rotationSpeedMax);
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + Vector3.forward * rotationSpeed * Time.deltaTime);
+    }
  
 
     private void OnTriggerEnter2D(Collider2D collision)

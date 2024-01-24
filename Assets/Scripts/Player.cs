@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 { 
+    [SerializeField]
+    private Transform _bulletSpawnPoint;
 
     public float playerSpeed; // modifies player speed value
     private Rigidbody2D rb; 
     private Vector2 playerDirection;
     public GameObject bullet;
     private float lastAttackTime; // number to get last time the space was pressed
+
+    [SerializeField]
     private int _HP;
     public int _BulletUpgrade = 1; // number for how many bullets to shoot
     private float attackCD = 1f; // float to describe attack cooldown (smaller = attack more often)
+
+    private Camera _mainCamera;
 
     public int HP
     {
@@ -29,11 +36,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _mainCamera = Camera.main;
+
         rb = GetComponent<Rigidbody2D>();
-        if (_HP == 0)
-        {
-            _HP = 1;
-        }
+        // if (_HP == 0)
+        // {
+        //     _HP = 1;
+        // }
     }
 
     // Update is called once per frame
@@ -58,7 +67,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = playerDirection * playerSpeed; // moves the player in the direction of the button(s) being pressed
+        Vector2 targetVelocity = playerDirection * playerSpeed;
+        rb.velocity = targetVelocity; // moves the player in the direction of the button(s) being pressed
     }
 
     void spawnBullet()
@@ -66,15 +76,19 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < _BulletUpgrade; i++)
         {
-            Vector2 pos = new Vector2(transform.position.x, transform.position.y - (_BulletUpgrade / 2f) + i * 1f + .5f);
-            Instantiate(bullet, pos, transform.rotation); // spawning the bullet prefab infront of the player with the same rotation
+            Vector2 pos = new Vector2(_bulletSpawnPoint.position.x, _bulletSpawnPoint.transform.position.y - (_BulletUpgrade / 2f) + i * 1f + .5f);
+
+            // pos += new Vector2(_bulletSpawnPoint.position.x, _bulletSpawnPoint.transform.position.y);
+
+            // Keep the rotation set in the bullet prefab
+            Instantiate(bullet, bullet.transform.position + (Vector3)pos, bullet.transform.rotation); // spawning the bullet prefab infront of the player with the same rotation
         }
 
     }
 
     public void takeDamage(int damage)
     {
-        _HP = -_HP - damage;
+        _HP = _HP - damage;
     }
 
 }

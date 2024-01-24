@@ -5,7 +5,11 @@ using UnityEngine;
 public class ShootingEnemy : Enemy
 {
     public GameObject missile;
-    private float attackCD = 1f;
+
+    [SerializeField]
+    private Transform _bulletSpawnPoint;
+
+    private float attackCD = 2f;
     private float lastAttackTime;
     // Start is called before the first frame update
     void Start()
@@ -34,7 +38,7 @@ public class ShootingEnemy : Enemy
     private void Shoot()
     {
         Vector2 pos = new Vector2(transform.position.x, transform.position.y);
-        Instantiate(missile, pos, transform.rotation);
+        Instantiate(missile, _bulletSpawnPoint.position, missile.transform.rotation);
     }
 
     private void moveUpDown()

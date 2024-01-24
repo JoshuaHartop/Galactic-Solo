@@ -45,14 +45,14 @@ public class EnemySpawn : LocalManager<EnemySpawn>
         {
             float randomY = Random.Range(minY, maxY);
             Vector2 pos = new Vector2(transform.position.x, randomY);
-             Instantiate(basicEnemy, pos, transform.rotation);
+            Instantiate(basicEnemy, basicEnemy.transform.position + (Vector3)pos, basicEnemy.transform.rotation);
             CurrentEnemyCount++;
         }
         for (int i = 0; i < (_CurrentWave / 2); i++) // spawner for shooter
         {
             float randomY = Random.Range(minY, maxY);
             Vector2 pos = new Vector2(12.75f, randomY);
-            Instantiate(shooterEnemy, pos, transform.rotation);
+            Instantiate(shooterEnemy, shooterEnemy.transform.position + (Vector3)pos, basicEnemy.transform.rotation);
             CurrentEnemyCount++;
 
         }
@@ -61,7 +61,7 @@ public class EnemySpawn : LocalManager<EnemySpawn>
             float randomY = Random.Range(minY, maxY);
             Vector2 pos = new Vector2(transform.position.x, randomY);
 
-             Instantiate(Asteroid, pos, transform.rotation);
+            Instantiate(Asteroid, pos, transform.rotation);
             CurrentEnemyCount++;
 
         }
