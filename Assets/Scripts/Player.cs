@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -67,7 +68,33 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        BoundsUtil.Direction boundsDirection = BoundsUtil.CalcOutsideBoundsDirection(_mainCamera, transform.position);
+
         Vector2 targetVelocity = playerDirection * playerSpeed;
+
+        // Prevent player from going out of bounds
+        if (boundsDirection.HasFlag(BoundsUtil.Direction.North))
+        {
+            if (targetVelocity.y > 0f)
+                targetVelocity.y = 0f;
+        }
+        else if (boundsDirection.HasFlag(BoundsUtil.Direction.South))
+        {
+            if (targetVelocity.y < 0f)
+                targetVelocity.y = 0f;
+        }
+
+        if (boundsDirection.HasFlag(BoundsUtil.Direction.East))
+        {
+            if (targetVelocity.x > 0f)
+                targetVelocity.x = 0f;
+        }
+        else if (boundsDirection.HasFlag(BoundsUtil.Direction.West))
+        {
+            if (targetVelocity.x < 0f)
+                targetVelocity.x = 0f;
+        }
+
         rb.velocity = targetVelocity; // moves the player in the direction of the button(s) being pressed
     }
 

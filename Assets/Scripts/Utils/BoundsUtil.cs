@@ -16,25 +16,26 @@ public class BoundsUtil
     {
         Vector2 viewCoords = camera.WorldToViewportPoint(worldPos);
 
-        if (viewCoords.x > 1.0f) 
+        Direction dirFlag = Direction.None;
+
+        if (viewCoords.x > 1.0f)
         {
-            return Direction.East;
+            dirFlag |= Direction.East;
         } 
         else if (viewCoords.x < 0.0f)
         {
-            return Direction.West;
+            dirFlag |= Direction.West;
         }
-        else if (viewCoords.y > 1.0f)
+
+        if (viewCoords.y > 1.0f)
         {
-            return Direction.North;
+            dirFlag |= Direction.North;
         }
         else if (viewCoords.y < 0.0f)
         {
-            return Direction.South;
+            dirFlag |= Direction.South;
         }
-        else
-        {
-            return Direction.None;
-        }
+
+        return dirFlag;
     }
 }
