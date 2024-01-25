@@ -8,6 +8,7 @@ public class EnemySpawn : LocalManager<EnemySpawn>
     [SerializeField] private Enemy basicEnemy;
     [SerializeField] private Enemy shooterEnemy;
     [SerializeField] private Enemy Asteroid;
+    public WaveTextScript textscript;
     
     private float minY = -6;
     private float maxY = 6;
@@ -41,6 +42,9 @@ public class EnemySpawn : LocalManager<EnemySpawn>
 
     void spawnEnemies()
     {
+        textscript.textAppear();
+        textscript.setText("Wave " + _CurrentWave);
+        print("spawned");
         for (int i = 0; i < _CurrentWave; i++) // spawner for basic
         {
             float randomY = Random.Range(minY, maxY);

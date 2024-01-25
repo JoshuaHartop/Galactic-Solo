@@ -96,9 +96,14 @@ public class Enemy : MonoBehaviour
 
     protected void Die()
     {
-        spawner.enemyDeath();
+        
         Destroy(this.gameObject);
         
+    }
+
+    private void OnDestroy()
+    {
+        spawner.enemyDeath();
     }
 
     public void takeDamage(int damage)
