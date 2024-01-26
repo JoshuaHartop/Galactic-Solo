@@ -12,10 +12,8 @@ public class SoundManager : GlobalManager<SoundManager>
     [Range(0f, 1f)]
     private float _volume;
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-
         Volume = _volume;
     }
 

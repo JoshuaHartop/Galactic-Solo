@@ -1,0 +1,60 @@
+VisualElement {
+}
+
+#volume-slider > Label {
+    align-self: center;
+    align-items: center;
+    -unity-text-align: upper-center;
+}
+
+#volume-slider {
+    flex-direction: column;
+}
+
+.unity-button {
+    background-color: rgba(0, 0, 0, 0);
+    -unity-text-align: upper-center;
+    -unity-font-style: normal;
+    align-items: flex-start;
+    align-self: center;
+    justify-content: center;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.unity-button:focus > #indicator-image {
+    opacity: 1;
+}
+
+.unity-button > #indicator-image {
+    opacity: 0;
+    display: none;
+}
+
+.unity-slider-int {
+    background-color: rgba(0, 0, 0, 0);
+    -unity-text-align: upper-center;
+    -unity-font-style: normal;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+#volume-slider:focus > Label {
+    color: rgb(255, 255, 255);
+}
+
+#volume-slider-container > #volume-indicator-image {
+    opacity: 0;
+    display: none;
+}
+
+.unity-slider-int:focus #volume-indicator-image {
+    opacity: 1;
+}

@@ -34,7 +34,7 @@ public abstract class GlobalManager<ManagerType> : MonoBehaviour where ManagerTy
         }
     }
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         _instance = Preloader.GetPreloadInstance().GetComponentInChildren<ManagerType>();
     }

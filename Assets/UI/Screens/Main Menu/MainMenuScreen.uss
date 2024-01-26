@@ -1,0 +1,21 @@
+.unity-button {
+    background-color: rgba(0, 0, 0, 0);
+    -unity-text-align: upper-center;
+    -unity-font-style: normal;
+    align-items: flex-start;
+    align-self: center;
+    justify-content: center;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.unity-button:focus > #indicator-image {
+    opacity: 1;
+}
+
+.unity-button > #indicator-image {
+    opacity: 0;
+    display: none;
+}
