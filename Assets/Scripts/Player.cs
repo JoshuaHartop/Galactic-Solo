@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+[RequireComponent(typeof(OutOfBoundsListener))]
 public class Player : MonoBehaviour
 { 
     [SerializeField]
@@ -21,6 +22,8 @@ public class Player : MonoBehaviour
     private float attackCD = 1f; // float to describe attack cooldown (smaller = attack more often)
 
     private Camera _mainCamera;
+
+    private OutOfBoundsListener.BoundsDirection _outOfBoundsDirectionFlags;
 
     public int HP
     {
@@ -44,6 +47,8 @@ public class Player : MonoBehaviour
         // {
         //     _HP = 1;
         // }
+
+        GetComponent<OutOfBoundsListener>().onOutOfBounds += OnOutOfBounds;
     }
 
     // Update is called once per frame
@@ -68,28 +73,26 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        BoundsUtil.Direction boundsDirection = BoundsUtil.CalcOutsideBoundsDirection(_mainCamera, transform.position);
-
         Vector2 targetVelocity = playerDirection * playerSpeed;
 
         // Prevent player from going out of bounds
-        if (boundsDirection.HasFlag(BoundsUtil.Direction.North))
+        if (_outOfBoundsDirectionFlags.HasFlag(OutOfBoundsListener.BoundsDirection.North))
         {
             if (targetVelocity.y > 0f)
                 targetVelocity.y = 0f;
         }
-        else if (boundsDirection.HasFlag(BoundsUtil.Direction.South))
+        else if (_outOfBoundsDirectionFlags.HasFlag(OutOfBoundsListener.BoundsDirection.South))
         {
             if (targetVelocity.y < 0f)
                 targetVelocity.y = 0f;
         }
 
-        if (boundsDirection.HasFlag(BoundsUtil.Direction.East))
+        if (_outOfBoundsDirectionFlags.HasFlag(OutOfBoundsListener.BoundsDirection.East))
         {
             if (targetVelocity.x > 0f)
                 targetVelocity.x = 0f;
         }
-        else if (boundsDirection.HasFlag(BoundsUtil.Direction.West))
+        else if (_outOfBoundsDirectionFlags.HasFlag(OutOfBoundsListener.BoundsDirection.West))
         {
             if (targetVelocity.x < 0f)
                 targetVelocity.x = 0f;
@@ -116,6 +119,11 @@ public class Player : MonoBehaviour
     public void takeDamage(int damage)
     {
         _HP = _HP - damage;
+    }
+
+    private void OnOutOfBounds(OutOfBoundsListener.BoundsDirection direction)
+    {
+        _outOfBoundsDirectionFlags = direction;
     }
 
 }
