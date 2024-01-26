@@ -6,7 +6,7 @@ using TMPro;
 
 public class WaveTextScript : MonoBehaviour
 {
-    public TMP_Text text;
+    private TMP_Text text;
     public void textAppear()
     {
         StartCoroutine(FadeTextToFullAlpha(1f, GetComponent<TMP_Text>()));

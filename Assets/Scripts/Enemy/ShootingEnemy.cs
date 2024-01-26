@@ -18,7 +18,7 @@ public class ShootingEnemy : Enemy
         EnemyUpVelocity = 2;
         HP = 2;
         RB = GetComponent<Rigidbody2D>();
-        
+        PointWorth = 500;
     }
 
     protected override void Update()

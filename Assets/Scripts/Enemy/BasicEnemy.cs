@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BasicEnemy : Enemy
 {
+    
     private Player player;
     protected override void Start()
     {
@@ -11,6 +12,7 @@ public class BasicEnemy : Enemy
         HP = 1;
         EnemyVelocity = -2.5f;
         RB = GetComponent<Rigidbody2D>();
+        PointWorth = 100;
 
     }
 

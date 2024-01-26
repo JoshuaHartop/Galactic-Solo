@@ -21,6 +21,7 @@ public class AsteroidEnemy : Enemy
         player = GameObject.Find("Player");
         RB = GetComponent<Rigidbody2D>();
         INV = true;
+        PointWorth = 1000;
 
     }
 

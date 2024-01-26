@@ -10,11 +10,26 @@ public class Enemy : MonoBehaviour
     private float _EnemyVelocity = 0f;
     private float _EnemyUpVelocity = 0f;
     private EnemySpawn spawner;
-   protected virtual void Start()
+    private PointsScript points;
+    private int _PointWorth;
+    protected virtual void Start()
     {
         spawner = EnemySpawn.Instance;
+        points = PointsScript.Instance;
     }
 
+    public int PointWorth
+    {
+        get
+        {
+            return _PointWorth;
+        }
+
+        set
+        {
+            _PointWorth = value;
+        }
+    }
     public float EnemyUpVelocity
     {
         get 
@@ -103,6 +118,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        points.addPoints(_PointWorth);
         spawner.enemyDeath();
     }
 
