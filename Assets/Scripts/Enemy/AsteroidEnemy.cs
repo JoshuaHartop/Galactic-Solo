@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(OutOfBoundsListener))]
 public class AsteroidEnemy : Enemy
 {
     [SerializeField]
@@ -23,6 +24,7 @@ public class AsteroidEnemy : Enemy
         INV = true;
         PointWorth = 1000;
 
+        GetComponent<OutOfBoundsListener>().onOutOfBounds += OnOutOfBounds;
     }
 
     // Update is called once per frame
@@ -41,5 +43,11 @@ public class AsteroidEnemy : Enemy
         {
             Destroy(player);
         }
+    }
+
+    private void OnOutOfBounds(OutOfBoundsListener.BoundsDirection direction)
+    {
+        if (direction == OutOfBoundsListener.BoundsDirection.West)
+            Destroy(gameObject);
     }
 }

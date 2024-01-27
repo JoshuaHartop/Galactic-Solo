@@ -1,22 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEditor;
+using System.Collections.Generic;
 
-// Todo: Actually implement
-public class PlayerData : SaveData<PlayerData>
+/// <summary>
+/// Holds data which determines how many times each upgrade has been
+/// upgraded in total.
+/// </summary>
+public class PlayerUpgradeData : SaveData<PlayerUpgradeData>
 {
-    public int health;
-    public float attackInterval;
-    public int bulletCount;
+    public int healthUpgrades;
+    public int bulletVelocityUpgrades;
+    public int bulletCountUpgrades;
 }
 
 [RequireComponent(typeof(OutOfBoundsListener))]
 public class Player : MonoBehaviour
-{ 
+{
+    [SerializeField]
+    private SceneAsset _gameOverScene;
+
     [SerializeField]
     private Transform _bulletSpawnPoint;
+
+    [SerializeField]
+    private AudioClip _fireSound;
+
+    [SerializeField]
+    private AudioClip _damageSound;
 
     public float playerSpeed; // modifies player speed value
     private Rigidbody2D rb; 
@@ -29,9 +40,22 @@ public class Player : MonoBehaviour
     public int _BulletUpgrade = 1; // number for how many bullets to shoot
     private float attackCD = 1f; // float to describe attack cooldown (smaller = attack more often)
 
+    private float _BulletVelocity = 5f;
+
     private Camera _mainCamera;
 
     private OutOfBoundsListener.BoundsDirection _outOfBoundsDirectionFlags;
+
+    private PlayerUpgradeData _playerData;
+
+    [SerializeField]
+    private int perHealthUpgradeAmount = 3;
+
+    [SerializeField]
+    private int perBulletCountUpgradeAmount = 1;
+
+    [SerializeField]
+    private float perBulletVelocityUpgradeAmount = 2.5f;
 
     public int HP
     {
@@ -52,12 +76,26 @@ public class Player : MonoBehaviour
         _mainCamera = Camera.main;
 
         rb = GetComponent<Rigidbody2D>();
-        // if (_HP == 0)
-        // {
-        //     _HP = 1;
-        // }
 
         GetComponent<OutOfBoundsListener>().onOutOfBounds += OnOutOfBounds;
+
+        _playerData = PlayerUpgradeData.Load();
+
+        // Don't question it
+        for (int i = 1; i < _playerData.healthUpgrades; i++)
+        {
+            _HP += perHealthUpgradeAmount;
+        }
+
+        for (int i = _BulletUpgrade; i < _playerData.bulletCountUpgrades; i++)
+        {
+            _BulletUpgrade += perBulletCountUpgradeAmount;
+        }
+
+        for (float i = _BulletVelocity; i < _playerData.bulletVelocityUpgrades; i++)
+        {
+            _BulletVelocity += perBulletVelocityUpgradeAmount;
+        }
     }
 
     // Update is called once per frame
@@ -69,6 +107,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey("space") && Time.time > lastAttackTime + attackCD)
         {
+            SoundManager.Instance.PlaySound(_fireSound, 0.2f);
+
             spawnBullet();
             lastAttackTime = Time.time;
         }
@@ -77,7 +117,6 @@ public class Player : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        // do gameover here
     }
 
     void FixedUpdate()
@@ -120,19 +159,28 @@ public class Player : MonoBehaviour
             // pos += new Vector2(_bulletSpawnPoint.position.x, _bulletSpawnPoint.transform.position.y);
 
             // Keep the rotation set in the bullet prefab
-            Instantiate(bullet, bullet.transform.position + (Vector3)pos, bullet.transform.rotation); // spawning the bullet prefab infront of the player with the same rotation
+            GameObject bulletObject = Instantiate(bullet, bullet.transform.position + (Vector3)pos, bullet.transform.rotation); // spawning the bullet prefab infront of the player with the same rotation
+            Bullet bulletComponent = bulletObject.GetComponent<Bullet>();
+            bulletComponent.BulletVelocity = _BulletVelocity;
         }
 
     }
 
     public void takeDamage(int damage)
     {
+        SoundManager.Instance.PlaySound(_damageSound);
+
         _HP = _HP - damage;
     }
 
     private void OnOutOfBounds(OutOfBoundsListener.BoundsDirection direction)
     {
         _outOfBoundsDirectionFlags = direction;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.LoadScene(_gameOverScene.name);
     }
 
 }

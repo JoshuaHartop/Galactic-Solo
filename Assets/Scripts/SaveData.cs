@@ -37,12 +37,10 @@ public class SaveData<T>
 
         if (json.HasKey(typeName))
         {
-            Debug.Log("Updating previous key value...");
             json[typeName] = JSON.Parse(JsonUtility.ToJson((T)Convert.ChangeType(this, typeof(T))));
         }
         else
         {
-            Debug.Log("Creating new key...");
             json.Add(
                     typeof(T).Name,
                     JSON.Parse(JsonUtility.ToJson((T)Convert.ChangeType(this, typeof(T))))

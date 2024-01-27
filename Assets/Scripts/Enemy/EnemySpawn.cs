@@ -8,11 +8,13 @@ public class EnemySpawn : LocalManager<EnemySpawn>
     [SerializeField] private Enemy basicEnemy;
     [SerializeField] private Enemy shooterEnemy;
     [SerializeField] private Enemy Asteroid;
+
+    [SerializeField] private AudioClip _nextWaveSound;
     public WaveTextScript textscript;
     
     private float minY = -6;
     private float maxY = 6;
-    private int _CurrentWave = 2;
+    private int _CurrentWave = 0;
     private int _CurrentEnemyCount;
     public int CurrentEnemyCount
     {
@@ -36,6 +38,9 @@ public class EnemySpawn : LocalManager<EnemySpawn>
         if (CurrentEnemyCount == 0)
         {
             _CurrentWave++;
+
+            SoundManager.Instance.PlaySound(_nextWaveSound, 0.5f);
+
             spawnEnemies();
         }
     }

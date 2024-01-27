@@ -26,12 +26,15 @@ public class MenuScreenManager : LocalManager<MenuScreenManager>
     {
         base.Start();
 
-        _startScreen.screen.Show();
-        _currentScreen = _startScreen;
+        if (_startScreen.screen != null)
+        {
+            _startScreen.screen.Show();
+            _currentScreen = _startScreen;
+        }
 
         foreach (MenuScreenPair pair in _screens)
         {
-            if (pair.id != _startScreen.id)
+            if (pair.screen == null || pair.id != _startScreen.id)
             {
                 pair.screen.Hide();
             }

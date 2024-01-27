@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7145341551315881230}
   - component: {fileID: 813235331667240283}
   - component: {fileID: 1249324980738894132}
-  - component: {fileID: 3879699590141701469}
+  - component: {fileID: 7255953339961094215}
   m_Layer: 0
   m_Name: asteroidEnemy
   m_TagString: Enemy
@@ -308,9 +308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1460f524b91ab645994c665f0ac8590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deathSound: {fileID: 8300000, guid: ee8fc8c8f1e9618439d5b89b73c28028, type: 3}
   _rotationSpeedMin: 20
   _rotationSpeedMax: 100
---- !u!114 &3879699590141701469
+--- !u!114 &7255953339961094215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,7 +320,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8273526496121464014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abe8c017d1ee8e44fa69153baaf529f0, type: 3}
+  m_Script: {fileID: 11500000, guid: c91df443a77f6594d9dbdc6d13ed617d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyFlags: 8
+  _viewportCamera: {fileID: 0}
+  _checkInterval: 20
+  _safeZone: -0.08

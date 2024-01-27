@@ -19,6 +19,9 @@ public class ShootingEnemy : Enemy
         HP = 2;
         RB = GetComponent<Rigidbody2D>();
         PointWorth = 500;
+
+        attackCD += Random.Range(0f, 1f);
+        lastAttackTime = Time.time;
     }
 
     protected override void Update()

@@ -152,7 +152,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9c9ce862fdbb0064eb4de68f67b275d3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -353,6 +353,8 @@ MonoBehaviour:
   - volume-slider
   - back-button
   _initialFocus: back-button
+  _menuNavigationSoundEffect: {fileID: 8300000, guid: 686724359b6ec4c4ba4b668a0ee7abab, type: 3}
+  _menuConfirmSoundEffect: {fileID: 8300000, guid: c36d6e99e7026fb4fb3137aec64ee5cb, type: 3}
   _backButtonID: back-button
   _volumeSliderID: volume-slider
   _volumeSliderIndicatorID: volume-indicator-image
@@ -579,6 +581,8 @@ MonoBehaviour:
   - settings-button
   - quit-button
   _initialFocus: start-button
+  _menuNavigationSoundEffect: {fileID: 8300000, guid: 686724359b6ec4c4ba4b668a0ee7abab, type: 3}
+  _menuConfirmSoundEffect: {fileID: 8300000, guid: c36d6e99e7026fb4fb3137aec64ee5cb, type: 3}
   _startButtonID: start-button
   _settingsButtonID: settings-button
   _quitButtonID: quit-button

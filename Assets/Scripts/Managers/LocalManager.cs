@@ -38,11 +38,6 @@ public abstract class LocalManager<ManagerType> : MonoBehaviour where ManagerTyp
         }
     }
 
-    public LocalManager()
-    {
-        Debug.AssertFormat(_instance == null, "A new instance of a singleton manager was created but one already exists - multiple instances of a singleton is not allowed!");
-    }
-
     protected virtual void Start()
     {
         if (_instance == null)

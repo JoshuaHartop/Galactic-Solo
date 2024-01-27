@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+class VolumeSaveData : SaveData<VolumeSaveData>
+{
+    public float volume;
+}
+
 /// <summary>
 /// Handles setting the global sound volume.
 /// </summary>
@@ -12,9 +17,22 @@ public class SoundManager : GlobalManager<SoundManager>
     [Range(0f, 1f)]
     private float _volume;
 
+    private AudioSource _audioSource;
+
+    private VolumeSaveData _volumeSaveData;
+
     protected void Start()
     {
-        Volume = _volume;
+        _volumeSaveData = VolumeSaveData.Load();
+
+        Volume = _volumeSaveData.volume;
+
+        _audioSource = gameObject.AddComponent<AudioSource>();
+    }
+
+    private void OnDestroy()
+    {
+        _volumeSaveData.Save();
     }
 
     /// <summary>
@@ -26,11 +44,18 @@ public class SoundManager : GlobalManager<SoundManager>
         set {
             Debug.AssertFormat(value >= 0f && value <= 1f, "Volume must be a value between 0.0 and 1.0!");
 
+            _volumeSaveData.volume = value;
             AudioListener.volume = value;
         }
 
         get {
             return AudioListener.volume;
         }
+    }
+
+    public void PlaySound(AudioClip clip, float volume = 1.0f)
+    {
+        // _audioSource.Stop();
+        _audioSource.PlayOneShot(clip, volume);
     }
 }

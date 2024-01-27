@@ -15,6 +15,7 @@ public class PointsScript : LocalManager<PointsScript>
     {
         _pointsData = PointsData.Load();
         _points = _pointsData._savePoints;
+        text.text = "Points: " + _points.ToString();
     }
     public void addPoints(int pointsToAdd)
     {

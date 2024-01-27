@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
 
 [RequireComponent(typeof(OutOfBoundsListener))]
 public class Bullet : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip _collisionSound;
+
     private int _BulletPierce;
     private Enemy enemy;
     private float _BulletVelocity;
@@ -69,6 +73,8 @@ public class Bullet : MonoBehaviour
 
         else if (collision.tag == "EnemyBullet")
         {
+            SoundManager.Instance.PlaySound(_collisionSound, 0.33f);
+
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
         }

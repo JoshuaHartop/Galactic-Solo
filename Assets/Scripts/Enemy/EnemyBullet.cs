@@ -5,6 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(OutOfBoundsListener))]
 public class EnemyBullet : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip _missileExplodeSound;
+
+    [SerializeField]
+    private AudioClip _missileLaunchSound;
+
     private Player player;
     private float _BulletVelocity;
     private Rigidbody2D rb;
@@ -31,6 +37,8 @@ public class EnemyBullet : MonoBehaviour
         }
 
         GetComponent<OutOfBoundsListener>().onOutOfBounds += OnOutOfBounds;
+
+        SoundManager.Instance.PlaySound(_missileLaunchSound, 0.2f);
     }
 
     private void FixedUpdate()
@@ -41,10 +49,11 @@ public class EnemyBullet : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            SoundManager.Instance.PlaySound(_missileExplodeSound);
+
             player = collision.GetComponent<Player>();
             player.takeDamage(1);
             Destroy(this.gameObject);
-           
         }
     }
 

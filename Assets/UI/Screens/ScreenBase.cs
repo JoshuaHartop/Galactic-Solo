@@ -20,6 +20,12 @@ public class ScreenBase : MonoBehaviour
     private UIDocument _uiDocument;
     private IEventHandler _focusedElement;
 
+    [SerializeField]
+    private AudioClip _menuNavigationSoundEffect;
+
+    [SerializeField]
+    private AudioClip _menuConfirmSoundEffect;
+
     protected virtual void OnEnable()
     {
         if (_screenManager == null)
@@ -77,6 +83,8 @@ public class ScreenBase : MonoBehaviour
         });
 
         GetRootElement().RegisterCallback((NavigationMoveEvent evt) => {
+            SoundManager.Instance.PlaySound(_menuNavigationSoundEffect);
+
             switch (evt.direction)
             {
                 case NavigationMoveEvent.Direction.Up:
@@ -86,9 +94,16 @@ public class ScreenBase : MonoBehaviour
                     SetFocusNext();
                     break;
             }
-
             evt.PreventDefault();
         });
+
+        foreach (string focusElement in _focusOrder)
+        {
+            VisualElement elem = GetRootElement().Query<VisualElement>(focusElement);
+            elem.RegisterCallback((ClickEvent evt) => {
+                SoundManager.Instance.PlaySound(_menuConfirmSoundEffect);
+            });
+        }
     }
 
     private void SetFocusNext()

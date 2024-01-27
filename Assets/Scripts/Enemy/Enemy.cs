@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip _deathSound;
+
     private int _HP;
     private bool _inv = false;
     private Rigidbody2D _rb;
@@ -124,6 +127,7 @@ public class Enemy : MonoBehaviour
 
     public void takeDamage(int damage)
     {
+        SoundManager.Instance.PlaySound(_deathSound, 0.33f);
         _HP = _HP - damage;
     }
 
