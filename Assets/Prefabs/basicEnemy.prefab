@@ -229,6 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91df443a77f6594d9dbdc6d13ed617d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directions: 0
   _viewportCamera: {fileID: 0}
   _checkInterval: 20
+  _safeZone: -0.04

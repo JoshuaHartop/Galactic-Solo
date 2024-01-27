@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 1597672904175877695}
   - component: {fileID: -4967074297874699106}
   - component: {fileID: 6712826253049968980}
-  - component: {fileID: 4104689254771461286}
+  - component: {fileID: 6176421346030492372}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: EnemyBullet
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f9fc682662247d49afaba7972058694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4104689254771461286
+--- !u!114 &6176421346030492372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -328,7 +328,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8403456911605437342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abe8c017d1ee8e44fa69153baaf529f0, type: 3}
+  m_Script: {fileID: 11500000, guid: c91df443a77f6594d9dbdc6d13ed617d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyFlags: 8
+  _viewportCamera: {fileID: 0}
+  _checkInterval: 20
+  _safeZone: -0.1

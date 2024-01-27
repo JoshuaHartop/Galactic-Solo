@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(OutOfBoundsListener))]
 public class Bullet : MonoBehaviour
 {
     private int _BulletPierce;
@@ -45,6 +46,8 @@ public class Bullet : MonoBehaviour
         {
             _BulletVelocity = 5.00f;
         }
+
+        GetComponent<OutOfBoundsListener>().onOutOfBounds += OnOutOfBounds;
     }
 
     private void FixedUpdate()
@@ -53,12 +56,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "BulletBorder")
-        {
-            Destroy(this.gameObject);
-        }
-
-        else if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
             enemy = collision.GetComponent<Enemy>();
             enemy.takeDamage(1);
@@ -76,5 +74,8 @@ public class Bullet : MonoBehaviour
         }
     }
 
-
+    private void OnOutOfBounds(OutOfBoundsListener.BoundsDirection direction)
+    {
+        Destroy(gameObject);
+    }
 }
