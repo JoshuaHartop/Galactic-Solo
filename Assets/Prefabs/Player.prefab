@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 2866281255624199888}
   - component: {fileID: 7162459920505369217}
   - component: {fileID: 8103487635064696321}
-  - component: {fileID: 4297538514064909453}
+  - component: {fileID: 5778082932729206611}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -377,7 +377,7 @@ MonoBehaviour:
   bullet: {fileID: 8403456911605437342, guid: a231b69c579ba634c97b2ade5dd87c63, type: 3}
   _HP: 3
   _BulletUpgrade: 1
---- !u!114 &4297538514064909453
+--- !u!114 &5778082932729206611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,7 +386,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9005655537062696449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abe8c017d1ee8e44fa69153baaf529f0, type: 3}
+  m_Script: {fileID: 11500000, guid: c91df443a77f6594d9dbdc6d13ed617d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyFlags: 13
+  directions: 0
+  _viewportCamera: {fileID: 0}
+  _checkInterval: 20

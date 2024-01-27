@@ -4,6 +4,14 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+// Todo: Actually implement
+public class PlayerData : SaveData<PlayerData>
+{
+    public int health;
+    public float attackInterval;
+    public int bulletCount;
+}
+
 [RequireComponent(typeof(OutOfBoundsListener))]
 public class Player : MonoBehaviour
 { 
@@ -37,6 +45,7 @@ public class Player : MonoBehaviour
             _HP = value;
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
