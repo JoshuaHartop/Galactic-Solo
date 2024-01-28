@@ -378,9 +378,9 @@ MonoBehaviour:
   _damageSound: {fileID: 8300000, guid: fb530e7d2854ff04ba66fa08d64b12a9, type: 3}
   playerSpeed: 4
   bullet: {fileID: 8403456911605437342, guid: a231b69c579ba634c97b2ade5dd87c63, type: 3}
-  _HP: 3
+  _HP: 2
   _BulletUpgrade: 1
-  perHealthUpgradeAmount: 3
+  perHealthUpgradeAmount: 2
   perBulletCountUpgradeAmount: 1
   perBulletVelocityUpgradeAmount: 2.5
 --- !u!114 &5778082932729206611

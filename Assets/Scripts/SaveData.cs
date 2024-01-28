@@ -43,17 +43,13 @@ public class SaveData<T> where T : new()
 
         if (json.HasKey(typeName))
         {
-            Debug.Log("Modified");
             json[typeName] = parsedValue;
         }
         else
         {
-            Debug.Log("Added: " + typeName + " with value " + parsedValue.ToString());
             json.Add(typeName, parsedValue);
-            Debug.Log(json);
         }
 
-        Debug.LogFormat("({0}): {1}", typeName, json.ToString());
         File.WriteAllText(_dataPath, json.ToString());
     }
 

@@ -87,17 +87,17 @@ public class Player : MonoBehaviour
         _playerData = PlayerUpgradeData.Load();
 
         // Don't question it
-        for (int i = 1; i < _playerData.healthUpgrades; i++)
+        for (int i = 0; i < _playerData.healthUpgrades; i++)
         {
             _HP += perHealthUpgradeAmount;
         }
 
-        for (int i = _BulletUpgrade; i < _playerData.bulletCountUpgrades; i++)
+        for (int i = 0; i < _playerData.bulletCountUpgrades; i++)
         {
             _BulletUpgrade += perBulletCountUpgradeAmount;
         }
 
-        for (float i = _BulletVelocity; i < _playerData.bulletVelocityUpgrades; i++)
+        for (float i = 0; i < _playerData.bulletVelocityUpgrades; i++)
         {
             _BulletVelocity += perBulletVelocityUpgradeAmount;
         }
