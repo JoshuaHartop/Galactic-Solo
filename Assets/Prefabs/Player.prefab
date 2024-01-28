@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe606acd99a56f4c9c471c163e90c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameOverScene: {fileID: 102900000, guid: fe94e97e7954aff478aeb71232f0f7b8, type: 3}
+  _gameOverSceneName: GameOver
   _bulletSpawnPoint: {fileID: 6971380011351790061}
   _fireSound: {fileID: 8300000, guid: fd4634b1da507564f96c4a03a83032e5, type: 3}
   _damageSound: {fileID: 8300000, guid: fb530e7d2854ff04ba66fa08d64b12a9, type: 3}
@@ -380,6 +380,9 @@ MonoBehaviour:
   bullet: {fileID: 8403456911605437342, guid: a231b69c579ba634c97b2ade5dd87c63, type: 3}
   _HP: 3
   _BulletUpgrade: 1
+  perHealthUpgradeAmount: 3
+  perBulletCountUpgradeAmount: 1
+  perBulletVelocityUpgradeAmount: 2.5
 --- !u!114 &5778082932729206611
 MonoBehaviour:
   m_ObjectHideFlags: 0

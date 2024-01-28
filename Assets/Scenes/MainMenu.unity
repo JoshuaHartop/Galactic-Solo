@@ -587,7 +587,7 @@ MonoBehaviour:
   _settingsButtonID: settings-button
   _quitButtonID: quit-button
   _settingsMenuID: settings-menu-screen
-  _playScene: {fileID: 102900000, guid: 2d7b33017be7a704181411bc7de364f0, type: 3}
+  _playSceneName: Main
 --- !u!114 &1934609112
 MonoBehaviour:
   m_ObjectHideFlags: 0

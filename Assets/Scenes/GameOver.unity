@@ -175,8 +175,8 @@ MonoBehaviour:
   _initialFocus: restart-button
   _menuNavigationSoundEffect: {fileID: 8300000, guid: 686724359b6ec4c4ba4b668a0ee7abab, type: 3}
   _menuConfirmSoundEffect: {fileID: 8300000, guid: c36d6e99e7026fb4fb3137aec64ee5cb, type: 3}
-  _playScene: {fileID: 102900000, guid: 2d7b33017be7a704181411bc7de364f0, type: 3}
-  _mainMenuScene: {fileID: 102900000, guid: 183d52206002b934288f91140e23a1ea, type: 3}
+  _playSceneName: Main
+  _mainMenuSceneName: MainMenu
   _restartButtonID: restart-button
   _shopButtonID: shop-button
   _returnButtonID: return-button

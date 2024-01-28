@@ -18,7 +18,7 @@ public class PlayerUpgradeData : SaveData<PlayerUpgradeData>
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private SceneAsset _gameOverScene;
+    private string _gameOverSceneName;
 
     [SerializeField]
     private Transform _bulletSpawnPoint;
@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        SoundManager.Instance.PlaySound(_damageSound);
+        SoundManager.Instance.PlaySound(_damageSound, 0.33f);
 
         _HP = _HP - damage;
     }
@@ -180,7 +180,7 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        SceneManager.LoadScene(_gameOverScene.name);
+        SceneManager.LoadScene(_gameOverSceneName);
     }
 
 }

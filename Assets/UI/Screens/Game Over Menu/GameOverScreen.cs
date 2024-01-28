@@ -8,10 +8,10 @@ using UnityEngine.SceneManagement;
 public class GameOverScreen : ScreenBase
 {
     [SerializeField]
-    private SceneAsset _playScene;
+    private string _playSceneName;
 
     [SerializeField]
-    private SceneAsset _mainMenuScene;
+    private string _mainMenuSceneName;
 
 
     [Header("UXML element identifiers")]
@@ -44,7 +44,7 @@ public class GameOverScreen : ScreenBase
 
     private void OnClickRestartButton(ClickEvent evt)
     {
-        SceneManager.LoadScene(_playScene.name);
+        SceneManager.LoadScene(_playSceneName);
     }
 
     private void OnClickShopButton(ClickEvent evt)
@@ -54,6 +54,6 @@ public class GameOverScreen : ScreenBase
 
     private void OnClickReturnButton(ClickEvent evt)
     {
-        SceneManager.LoadScene(_mainMenuScene.name);
+        SceneManager.LoadScene(_mainMenuSceneName);
     }
 }

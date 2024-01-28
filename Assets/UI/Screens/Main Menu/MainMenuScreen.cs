@@ -32,7 +32,7 @@ public class MainMenuScreen : ScreenBase
     [Header("Misc")]
 
     [SerializeField]
-    private SceneAsset _playScene;
+    private string _playSceneName;
 
     protected override void OnEnable()
     {
@@ -51,7 +51,7 @@ public class MainMenuScreen : ScreenBase
     private void OnClickStartButton(ClickEvent evt)
     {
         // Maybe open loading menu?
-        SceneManager.LoadScene(_playScene.name);
+        SceneManager.LoadScene(_playSceneName);
     }
 
     private void OnClickSettingsButton(ClickEvent evt)
