@@ -4,19 +4,8 @@ using UnityEngine;
 
 using SimpleJSON;
 
-[AttributeUsage(AttributeTargets.Class)]
-public class SaveDataAttribute : Attribute
-{
-    public Type saveDataType;
-
-    public SaveDataAttribute(Type dataType)
-    {
-        saveDataType = dataType;
-    }
-}
-
 [Serializable]
-public class SaveData<T>
+public class SaveData<T> where T : new()
 {
     private static readonly string _dataPath = Application.persistentDataPath + "/savedata.json";
 
@@ -26,27 +15,45 @@ public class SaveData<T>
     /// </summary>
     public void Save()
     {
+        JSONObject json;
+
         if (!File.Exists(_dataPath))
         {
-            File.Create(_dataPath);
-        }
-
-        JSONNode json = JSONNode.Parse(File.ReadAllText(_dataPath));
-
-        string typeName = typeof(T).Name;
-
-        if (json.HasKey(typeName))
-        {
-            json[typeName] = JSON.Parse(JsonUtility.ToJson((T)Convert.ChangeType(this, typeof(T))));
+            File.Create(_dataPath).Dispose();
+            json = new JSONObject();
         }
         else
         {
-            json.Add(
-                    typeof(T).Name,
-                    JSON.Parse(JsonUtility.ToJson((T)Convert.ChangeType(this, typeof(T))))
-            );
+            string fileContent = File.ReadAllText(_dataPath);
+            if (fileContent == null || fileContent == string.Empty)
+            {
+                json = new JSONObject();
+            }
+            else
+            {
+                json = JSON.Parse(File.ReadAllText(_dataPath)).AsObject;
+            }
         }
 
+        string typeName = typeof(T).Name;
+
+        T value = (T)Convert.ChangeType(this, typeof(T));
+        string jsonValue = JsonUtility.ToJson(value);
+        JSONNode parsedValue = JSON.Parse(jsonValue);
+
+        if (json.HasKey(typeName))
+        {
+            Debug.Log("Modified");
+            json[typeName] = parsedValue;
+        }
+        else
+        {
+            Debug.Log("Added: " + typeName + " with value " + parsedValue.ToString());
+            json.Add(typeName, parsedValue);
+            Debug.Log(json);
+        }
+
+        Debug.LogFormat("({0}): {1}", typeName, json.ToString());
         File.WriteAllText(_dataPath, json.ToString());
     }
 
@@ -58,13 +65,19 @@ public class SaveData<T>
     {
         if (!File.Exists(_dataPath))
         {
-            return default;
+            return new T();
         }
 
-        JSONNode _jsonDocument = JSONNode.Parse(File.ReadAllText(_dataPath));
+        JSONNode json = JSON.Parse(File.ReadAllText(_dataPath));
 
         string typeName = typeof(T).Name;
-        JSONObject jsonObject = _jsonDocument[typeName].AsObject;
+
+        if (!json.HasKey(typeName))
+        {
+            return new T();
+        }
+
+        JSONNode jsonObject = json[typeName];
 
         return JsonUtility.FromJson<T>(jsonObject.ToString());
     }

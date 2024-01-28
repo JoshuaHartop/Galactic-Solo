@@ -90,7 +90,7 @@ public class ShopMenuScreen : ScreenBase
         _pointsDisplayLabel.text = string.Format("You have {0:N0} pts", _pointsData._savePoints);
 
         _bulletCountUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletCountCost, _playerData.bulletCountUpgrades);
-        _bulletVelocityUpgradeInfoLabel.text = string.Format("Costs {0} pts ({1}/3)", _bulletVelocityCost, _playerData.bulletVelocityUpgrades);
+        _bulletVelocityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletVelocityCost, _playerData.bulletVelocityUpgrades);
         _shipDurabilityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _shipDurabilityCost, _playerData.healthUpgrades);
 
         _bulletCountCost = _bulletCountUpgradeBaseCost * (_playerData.bulletCountUpgrades + 1);

@@ -1,7 +1,5 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEditor;
-using System.Collections.Generic;
 
 /// <summary>
 /// Holds data which determines how many times each upgrade has been
@@ -12,6 +10,13 @@ public class PlayerUpgradeData : SaveData<PlayerUpgradeData>
     public int healthUpgrades;
     public int bulletVelocityUpgrades;
     public int bulletCountUpgrades;
+
+    public PlayerUpgradeData()
+    {
+        healthUpgrades = 0;
+        bulletVelocityUpgrades = 0;
+        bulletCountUpgrades = 0;
+    }
 }
 
 [RequireComponent(typeof(OutOfBoundsListener))]

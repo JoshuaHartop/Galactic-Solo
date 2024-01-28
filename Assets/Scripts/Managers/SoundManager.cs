@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 class VolumeSaveData : SaveData<VolumeSaveData>
 {
     public float volume;
+
+    public VolumeSaveData()
+    {
+        volume = 1f;
+    }
 }
 
 /// <summary>
@@ -46,6 +48,8 @@ public class SoundManager : GlobalManager<SoundManager>
 
             _volumeSaveData.volume = value;
             AudioListener.volume = value;
+
+            _volumeSaveData.Save();
         }
 
         get {
