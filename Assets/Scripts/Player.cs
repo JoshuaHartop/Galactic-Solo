@@ -62,6 +62,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float perBulletVelocityUpgradeAmount = 2.5f;
 
+    public delegate void OnTakeDamage(int damageTaken);
+
+    public OnTakeDamage onPlayerTakeDamage;
+
     public int HP
     {
         get
@@ -76,7 +80,7 @@ public class Player : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _mainCamera = Camera.main;
 
@@ -176,6 +180,9 @@ public class Player : MonoBehaviour
         SoundManager.Instance.PlaySound(_damageSound, 0.33f);
 
         _HP = _HP - damage;
+
+        if (onPlayerTakeDamage != null)
+            onPlayerTakeDamage(damage);
     }
 
     private void OnOutOfBounds(OutOfBoundsListener.BoundsDirection direction)
