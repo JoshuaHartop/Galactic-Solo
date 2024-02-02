@@ -38,6 +38,7 @@ SetOutPath $INSTDIR
 WriteUninstaller $INSTDIR\uninstall.exe
 
 CreateShortcut "$SMPROGRAMS\Galactic Solo.lnk" "$INSTDIR\Galactic Solo.exe"
+CreateShortcut "$DESKTOP\Galactic Solo.lnk" "$INSTDIR\Galactic Solo.exe"
 CreateShortcut "$SMPROGRAMS\Uninstall Galactic Solo.lnk" "$INSTDIR\uninstall.exe"
 
 # Add uninstaller to list of installed programs
@@ -72,6 +73,7 @@ Section "Uninstall"
 !include "generated\uninstall_files.nsi"
 
 Delete "$SMPROGRAMS\Galactic Solo.lnk"
+Delete "$DESKTOP\Galactic Solo.lnk"
 Delete "$SMPROGRAMS\Uninstall Galactic Solo.lnk"
 Delete "$INSTDIR\uninstall.exe"
 RMDir "$INSTDIR"
