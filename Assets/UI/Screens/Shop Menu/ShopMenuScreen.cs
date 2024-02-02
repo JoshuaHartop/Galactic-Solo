@@ -89,19 +89,54 @@ public class ShopMenuScreen : ScreenBase
         _pointsDisplayLabel = GetRootElement().Query<Label>(_pointsDisplayLabelID);
         _pointsDisplayLabel.text = string.Format("You have {0:N0} pts", _pointsData._savePoints);
 
-        _bulletCountUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletCountCost, _playerData.bulletCountUpgrades);
-        _bulletVelocityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletVelocityCost, _playerData.bulletVelocityUpgrades);
-        _shipDurabilityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _shipDurabilityCost, _playerData.healthUpgrades);
+        // _bulletCountUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletCountCost, _playerData.bulletCountUpgrades);
+        // _bulletVelocityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletVelocityCost, _playerData.bulletVelocityUpgrades);
+        // _shipDurabilityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _shipDurabilityCost, _playerData.healthUpgrades);
 
         _bulletCountCost = _bulletCountUpgradeBaseCost * (_playerData.bulletCountUpgrades + 1);
         _bulletVelocityCost = _bulletVelocityUpgradeBaseCost * (_playerData.bulletVelocityUpgrades + 1);
         _shipDurabilityCost = _shipDurabilityUpgradeBaseCost * (_playerData.healthUpgrades + 1);
+        
+        RefreshUpgradeMenuLabels();
     }
 
     private void OnDisable()
     {
         _playerData.Save();
         _pointsData.Save();
+    }
+
+    private void RefreshUpgradeMenuLabels()
+    {
+        if (_playerData.bulletCountUpgrades >= 3)
+        {
+            _bulletCountUpgradeInfoLabel.text = "Maxed out! (3/3)";
+        }
+        else
+        {
+            _pointsDisplayLabel.text = string.Format("You have {0:N0} pts", _pointsData._savePoints);
+            _bulletCountUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletCountCost, _playerData.bulletCountUpgrades);
+        }
+
+        if (_playerData.bulletVelocityUpgrades >= 3)
+        {
+            _bulletVelocityUpgradeInfoLabel.text = "Maxed out! (3/3)";
+        }
+        else
+        {
+            _pointsDisplayLabel.text = string.Format("You have {0:N0} pts", _pointsData._savePoints);
+            _bulletVelocityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletVelocityCost, _playerData.bulletVelocityUpgrades);
+        }
+
+        if (_playerData.healthUpgrades >= 3)
+        {
+            _shipDurabilityUpgradeInfoLabel.text = "Maxed out! (3/3)";
+        }
+        else
+        {
+            _pointsDisplayLabel.text = string.Format("You have {0:N0} pts", _pointsData._savePoints);
+            _shipDurabilityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _shipDurabilityCost, _playerData.healthUpgrades);
+        }
     }
 
     private void OnClickBulletCountUpgradeButton(ClickEvent evt)
@@ -113,9 +148,7 @@ public class ShopMenuScreen : ScreenBase
 
             _bulletCountCost = _bulletCountUpgradeBaseCost * (_playerData.bulletCountUpgrades + 1);
 
-            _pointsDisplayLabel.text = string.Format("You have {0:N0} pts", _pointsData._savePoints);
-            _bulletCountUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletCountCost, _playerData.bulletCountUpgrades);
-
+            RefreshUpgradeMenuLabels();
         }
     }
 
@@ -128,8 +161,7 @@ public class ShopMenuScreen : ScreenBase
 
             _bulletVelocityCost = _bulletVelocityUpgradeBaseCost * (_playerData.bulletVelocityUpgrades + 1);
 
-            _pointsDisplayLabel.text = string.Format("You have {0:N0} pts", _pointsData._savePoints);
-            _bulletVelocityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _bulletVelocityCost, _playerData.bulletVelocityUpgrades);
+            RefreshUpgradeMenuLabels();
         }
     }
 
@@ -142,8 +174,7 @@ public class ShopMenuScreen : ScreenBase
 
             _shipDurabilityCost = _shipDurabilityUpgradeBaseCost * (_playerData.healthUpgrades + 1);
 
-            _pointsDisplayLabel.text = string.Format("You have {0:N0} pts", _pointsData._savePoints);
-            _shipDurabilityUpgradeInfoLabel.text = string.Format("Costs {0:N0} pts ({1}/3)", _shipDurabilityCost, _playerData.healthUpgrades);
+            RefreshUpgradeMenuLabels();
         }
     }
 

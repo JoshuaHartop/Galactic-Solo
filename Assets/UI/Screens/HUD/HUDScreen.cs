@@ -19,15 +19,16 @@ public class HUDScreen : ScreenBase
 
     private Player _playerController;
 
+    private PointsScript _pointsMgr;
+
     protected override void OnEnable()
     {
         base.OnEnable();
 
         _pointsLabel = GetRootElement().Query<Label>(_pointsLabelID);
 
-        PointsScript pointsMgr = PointsScript.Instance;
-        _pointsLabel.text = string.Format("Points: {0:N0}", pointsMgr.GetPointCount());
-        pointsMgr.onAddPoints += OnAddPoints;
+        _pointsMgr = PointsScript.Instance;
+        _pointsMgr.onAddPoints += OnAddPoints;
     }
 
     private void Start()
@@ -42,6 +43,8 @@ public class HUDScreen : ScreenBase
             VisualElement elem = GetRootElement().Query<VisualElement>(_healthContainerID).Children<VisualElement>().AtIndex(i);
             elem.style.display = DisplayStyle.Flex;
         }
+
+        _pointsLabel.text = string.Format("Points: {0:N0}", _pointsMgr.GetPointCount());
     }
 
     private void OnAddPoints(int newPoints)
